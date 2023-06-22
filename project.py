@@ -17,3 +17,4 @@ while True:
 
     # Example usage:
     register_new_room()
+    
