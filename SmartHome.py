@@ -1,3 +1,4 @@
+
 usuarios = {}
 habitaciones_creadas = {}
 casas_creadas = {}
@@ -21,7 +22,7 @@ def ingresar(nombre, pin):
         current_user = usuarios[nombre]
         print(f'Bienvenido, {current_user["nombre"]}!\n')
         autenticado = True
-        usuariod_autenticado = nombre 
+        usuario_autenticado = nombre 
         return True
     else:
         print('Usuario y/o contraseña inválidos\n')
@@ -196,5 +197,3 @@ while True:
             usuario_autenticado = None  
         else:
             print("Opcion invalida")        
-
-
