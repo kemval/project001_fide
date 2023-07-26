@@ -135,6 +135,23 @@ def registrar_casa_habitacion():
 
 #____________________________________________________General__________________________________________________________________
 
+def AgregarDispositivo():
+  NombreDispositivo = input("Ingrese el nombre del dispositivo: ")
+  Estado = input("Ingrese el estado inicial del dispositivo (encendido/apagado): ")
+  if(Estado.lower() == "encendido"): 
+    Estado = "Encendido"
+  else: 
+    Estado = "Apagado"
+  Programacion = input("Ingrese la programacion del dispositivo (si/no): ")
+  if(Programacion.lower() == "si"):
+    Programacion = input("Ingrese la programacion del dispositivo: ")
+  else:
+    Programacion = "No tienen programacion"
+  print('Informacion de su dispositivo:')
+  print(f'Nombre: {NombreDispositivo}')
+  print(f'Estado: {Estado}')
+  print(f'Programacion: {Programacion}')
+
 
 def registro_cerraduras(casa, habitacion):
 
@@ -180,7 +197,8 @@ while True:
         print("\nMenú Autenticado:\n")
         print("1. Registro de nueva casa y habitacion")
         print("2. Actualizar PIN")
-        print("3. Cerrar sesión\n")
+        print("3. Agregar un dispositivo")
+        print("4. Cerrar sesión\n")
 
         autenticado_opcion = input("Elija una opción: ")
         if autenticado_opcion == "1":
@@ -193,6 +211,9 @@ while True:
             cambiarPin(pinActual, pinNuevo)
 
         elif autenticado_opcion == "3":
+            AgregarDispositivo()
+
+        elif autenticado_opcion == "4":
             print("Cerrando sesión...")
             usuario_autenticado = None  
         else:
