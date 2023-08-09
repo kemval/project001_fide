@@ -1,11 +1,50 @@
+import json
+
 usuarios = {}
 habitaciones_creadas = {}
 casas_creadas = {}
 usuario_autenticado = None
 autenticado = False
 
+def cargar_datos_json():
+
+    global usuarios, habitaciones_creadas, casas_creadas
+
+    try:
+        with open('usuarios.json', 'r') as usuarios_file:
+            usuarios = json.load(usuarios_file)
+
+    except FileNotFoundError:
+        usuarios = {}
+
+    try:
+        with open('habitaciones.json', 'r') as habitaciones_file:
+            habitaciones_creadas = json.load(habitaciones_file)
+
+    except FileNotFoundError:
+        habitaciones_creadas = {}
+
+    try:
+        with open('casas.json', 'r') as casas_file:
+            casas_creadas = json.load(casas_file)
+
+    except FileNotFoundError:
+        casas_creadas = {}
+
+def guardar_datos_json():
+
+    with open('usuarios.json', 'w') as usuarios_file:
+        json.dump(usuarios, usuarios_file)
+
+    with open('habitaciones.json', 'w') as habitaciones_file:
+        json.dump(habitaciones_creadas, habitaciones_file)
+
+    with open('casas.json', 'w') as casas_file:
+        json.dump(casas_creadas, casas_file)
+
 
 def registrar(nombre, correo, pin):
+
     while True:
         if nombre in usuarios:
             return 'El usuario ya existe\n'
@@ -151,7 +190,9 @@ def AgregarDispositivo():
 def registro_cerraduras(casa, habitacion):
 
     nombre_cerradura = input(f"\nIngrese el nombre de la cerradura para la habitación '{habitacion}': ").title()
+
     while True:
+
         estado = input(f"\nIngrese el estado de la cerradura (abierto/cerrado) para la habitación '{habitacion}': ").title()
 
         if estado not in ["Abierto", "Cerrado"]:
@@ -159,9 +200,20 @@ def registro_cerraduras(casa, habitacion):
         else:
             break
 
-    codigo_apertura = input(f"\nIngrese el código de apertura de la cerradura para la habitación '{habitacion}': ")
+    while True:
+
+        codigo_apertura = input(f"\nIngrese el código numeral de apertura de la cerradura para la habitación '{habitacion}': ")
+        
+        if codigo_apertura.isdigit():
+            codigo_apertura = int(codigo_apertura)
+            break
+        else:
+            print("\nPor favor, ingrese un número válido para el código de apertura.\n")        
+
     detalles_cerradura = {'nombre': nombre_cerradura, 'estado': estado, 'codigo_apertura': codigo_apertura}
+
     casas_creadas[casa]['habitaciones'][habitacion]['locks'].append(detalles_cerradura)
+
     print(f"\nCerradura registrada correctamente para la habitación '{habitacion}'.\n")
 
 
