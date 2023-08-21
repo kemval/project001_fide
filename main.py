@@ -3,8 +3,8 @@ import funciones
 funciones.cargar_datos_json()
 
 while True:
-
-    if not funciones.autenticado:  
+    
+    if not funciones.autenticado:                               #Si el usuario no se encuentra autenticado mostrar menu princiapl
         print("\nMenu Principal:\n")
         print("1. Registro")
         print("2. Ingresar")
