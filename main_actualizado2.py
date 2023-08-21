@@ -1,19 +1,19 @@
-import funciones
+import funciones_actualizado2
 
-funciones.cargar_datos_json()
+funciones_actualizado2.cargar_datos_json()
 
 while True:
 
-    if not funciones.autenticado:  
+    if not funciones_actualizado2.autenticado:  
         #El Menu de inicio para verificar si estar registrado o no
         print("\nMenu Principal:\n")
         print("1. Registro")
         print("2. Ingresar")
         print("3. Salir\n")
     
-        funciones.mostrar_registro()
+        funciones_actualizado2.mostrar_registro()
         opcion = input("\nElija una opción: ")
-        funciones.manejar_opciones_registro(opcion)
+        funciones_actualizado2.manejar_opciones_registro(opcion)
 
     else: 
         #Aqui nos muestra el menu Principal donde puede realizar todas las opciones el Usuario
@@ -30,15 +30,15 @@ while True:
         #Esta opcion nos permite ingresar una nueva casa y habitacion
         if autenticado_opcion == "1":
 
-            funciones.registrar_casa_habitacion()
-            funciones.guardar_datos_json()
+            funciones_actualizado2.registrar_casa_habitacion()
+            funciones_actualizado2.guardar_datos_json()
 
         #Esta opcion nos permite ver el registro de nuestras casas y habitaciones
         elif autenticado_opcion == "2":
 
             print("\nCasas y Habitaciones Registradas:\n")
 
-            for casa, habitaciones in funciones.casas_creadas.items():
+            for casa, habitaciones in funciones_actualizado2.casas_creadas.items():
 
                 print(f"Casa: {casa}")
 
@@ -53,23 +53,23 @@ while True:
 
             pinActual = input("\nIngrese su Contraseña Actual: ")
             pinNuevo = input("\nIngrese su Nueva Contraseña:")
-            funciones.cambiarPin(pinActual, pinNuevo)
-            funciones.guardar_datos_json()
+            funciones_actualizado2.cambiarPin(pinActual, pinNuevo)
+            funciones_actualizado2.guardar_datos_json()
 
 
         #En esta opcion nos permite ingresar un nuevo dispositivo
         elif autenticado_opcion == "4":
 
-            funciones.AgregarDispositivo()         
-            funciones.guardar_datos_json()
+            funciones_actualizado2.AgregarDispositivo()         
+            funciones_actualizado2.guardar_datos_json()
 
         #En esta opcion es para cerrar sesion
         elif autenticado_opcion == "5":
 
             print("Cerrando sesión...")
-            funciones.usuario_autenticado = None  
-            funciones.autenticado= False
-            funciones.guardar_datos_json()
+            funciones_actualizado2.usuario_autenticado = None  
+            funciones_actualizado2.autenticado= False
+            funciones_actualizado2.guardar_datos_json()
 
         #Opcion invalidad
         else:

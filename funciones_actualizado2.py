@@ -1,6 +1,7 @@
-import json
+import json      #Se importa la biblioteca Json para trabajar con los archivos posteriormente
 
 #Variables Globales
+
 usuarios = {}
 habitaciones_creadas = {}
 casas_creadas = {}
@@ -8,6 +9,7 @@ usuario_autenticado = None
 autenticado = False
 
 #Funcion de cargar los datos donde se van a guardar
+
 def cargar_datos_json():
 
     global usuarios, habitaciones_creadas, casas_creadas
@@ -33,6 +35,8 @@ def cargar_datos_json():
     except FileNotFoundError:
         casas_creadas = {}
 
+#funcion para guardar los datos
+
 def guardar_datos_json():
 
     with open('usuarios.json', 'w') as usuarios_file:
@@ -45,6 +49,7 @@ def guardar_datos_json():
         json.dump(casas_creadas, casas_file)
 
 #Funcion de la verificacion del usuario
+
 def registrar(nombre, correo, pin):
 
     while True:
@@ -54,27 +59,39 @@ def registrar(nombre, correo, pin):
         return 'Usuario registrado correctamente\n'
         
 #Funcion que nos permite ingresar
+
 def ingresar(nombre, pin):
+
     global autenticado, usuario_autenticado  
+
     if nombre in usuarios and usuarios[nombre]['pin'] == pin:
         current_user = usuarios[nombre]
+
         print(f'Bienvenido, {current_user["nombre"]}!\n')
+
         autenticado = True
         usuario_autenticado = nombre 
+
         return True
     else:
+
         print('Usuario y/o contraseña inválidos\n')
         return False
     
 #Mostrar el registro de usuarios
+
 def mostrar_registro():
+
     if usuarios:
+
         print('Usuarios registrados:\n')
+
         for nombre in usuarios.values():
             print(f"nombre: {nombre['nombre']}\n")
         print("")
 
 #Funcion que nos permite registrarnos
+
 def manejar_opciones_registro(opcion):
     global autenticado  
     if opcion == "1":
@@ -99,6 +116,7 @@ def manejar_opciones_registro(opcion):
         print("\nOpcion invalida\n")
 
 #Funcion para utilizar el menu de inicio de session
+
 def menu_autenticado():
     print("Menú Autenticado:\n")
     print("1. Registro de nueva casa y habitacion")
@@ -107,6 +125,7 @@ def menu_autenticado():
     print("4. Cerrar sesión\n")
 
 #Funcion para utilizar el menu principal
+
 def manejar_menu_autenticado(opcion):
     if opcion == "1":
         print("Registro de nueva casa y habitacion")
@@ -122,6 +141,7 @@ def manejar_menu_autenticado(opcion):
     return True
 
 #Funcion para registrar una casa
+
 def registrar_casa_habitacion():
     while True: 
         casa = input("Ingrese el nombre de la casa o 'E' para salir: ").title()
@@ -173,27 +193,40 @@ def registrar_casa_habitacion():
                     print("Opción inválida. Volviendo al menú principal.\n")
 
 #Funcion para agregar los dispositivos
+
 def AgregarDispositivo(casa, habitacion):
+
     NombreDispositivo = input("Ingrese el nombre del dispositivo: ")
+
     Estado = input("Ingrese el estado inicial del dispositivo (encendido/apagado): ")
+
     if(Estado.lower() == "encendido"): 
+
         Estado = "Encendido"
     else: 
         Estado = "Apagado"
+
     Programacion = input("Ingrese la programacion del dispositivo (si/no): ")
+
     if(Programacion.lower() == "si"):
+
         Programacion = input("Ingrese la programacion del dispositivo: ")
     else:
         Programacion = "No tienen programacion"
+
     DetallesDispositivo = {'nombre': NombreDispositivo, 'estado': Estado, 'Programacion': Programacion}
+
     casas_creadas[casa]['habitaciones'][habitacion]['Dispositivos'].append(DetallesDispositivo)
+
     #Imprime al usuario el los datos del dispositivo
+
     print('Informacion de su dispositivo:')
     print(f'Nombre: {NombreDispositivo}')
     print(f'Estado: {Estado}')
     print(f'Programacion: {Programacion}')
 
 #Funcion para agregar las cerraduras
+
 def registro_cerraduras(casa, habitacion):
 
     nombre_cerradura = input(f"\nIngrese el nombre de la cerradura para la habitación '{habitacion}': ").title()
@@ -225,14 +258,21 @@ def registro_cerraduras(casa, habitacion):
 
 
 #Funcion para cambiar el pin
+
 def cambiarPin(pinActual, pinNuevo):
+
     global usuarios, usuario_autenticado
+
     #Primero verifica que el usuario este en el sistema
+
     if usuario_autenticado is not None: 
+
         #Luego perimete cambia el pin
+
         if pinActual == usuarios[usuario_autenticado]['pin']:
             usuarios[usuario_autenticado]['pin'] = pinNuevo
             print("\nSu pin ha sido cambiado correctamente.")
+
         else:
             print("\nNo se pudo cambiar su pin. Pin actual incorrecto.")
    

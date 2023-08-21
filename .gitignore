@@ -1,4 +1,5 @@
 # VSCode
+codigo_previo
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
