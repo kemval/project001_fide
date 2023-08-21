@@ -171,6 +171,7 @@ def registrar_casa_habitacion():
                             break
                         elif habitacion in casas_creadas[casa]['habitaciones']:
                             print("\nEste cuarto ya existe, por favor ingrese uno diferente.\n")
+                
                         else:
                             casas_creadas[casa]['habitaciones'][habitacion] = {'locks': []}  # Create locks list for room
                             print(f"Habitación '{habitacion}' registrada correctamente.\n")
@@ -182,10 +183,20 @@ def registrar_casa_habitacion():
 
                             if opcion == "1":
                                 registro_cerraduras(casa, habitacion)
-                            elif opcion == "2":
+                            else:
+                                print("No se aregara ninguna cerradura.\n")
+                            print('Desea agregar dispositivos a la habitacion?\n')
+                            print("1. Si")
+                            print("2. No\n")
+                            DispositivoNuevo = input('Elija una opcion: ')
+
+                            if DispositivoNuevo == "1":
+                                AgregarDispositivo(casa, habitacion)
+                            elif DispositivoNuevo == "2":
                                 break
                             else:
                                 print("Opción inválida. Volviendo al menú principal.\n")
+
                         break        
                 elif opcion == "2":
                     break
@@ -215,15 +226,9 @@ def AgregarDispositivo(casa, habitacion):
         Programacion = "No tienen programacion"
 
     DetallesDispositivo = {'nombre': NombreDispositivo, 'estado': Estado, 'Programacion': Programacion}
+    casas_creadas[casa]['habitaciones'][habitacion]['locks'].append(DetallesDispositivo)
+    print(DetallesDispositivo)
 
-    casas_creadas[casa]['habitaciones'][habitacion]['Dispositivos'].append(DetallesDispositivo)
-
-    #Imprime al usuario el los datos del dispositivo
-
-    print('Informacion de su dispositivo:')
-    print(f'Nombre: {NombreDispositivo}')
-    print(f'Estado: {Estado}')
-    print(f'Programacion: {Programacion}')
 
 #Funcion para agregar las cerraduras
 
